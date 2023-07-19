@@ -1,11 +1,3 @@
-#####
-# zsh-essentials - A small set of Zsh essentials that shouldn't be trusted to plugins.
-#####
-
-#
-# Options
-#
-
 # Set general options.
 typeset -ga zopts_general=(
   COMBINING_CHARS           # Combine 0-len chars with base chars (eg: accents).
@@ -34,6 +26,7 @@ typeset -ga zopts_completion=(
   AUTO_PARAM_SLASH          # If completed parameter is a directory, add a trailing slash.
   NO_MENU_COMPLETE          # Do not autoselect the first completion entry.
   NO_FLOW_CONTROL           # Disable start/stop characters in shell editor.
+   # expand aliases
 )
 
 # Set directory options.
@@ -79,51 +72,27 @@ setopt $zopts_general \
        $zopts_directory \
        $zopts_history \
        $zopts_prompt
-
-
-#
 # History
-#
-
 # Set Zsh history variables. We don't trust other methods.
 HISTFILE=${XDG_DATA_HOME:=~/.local/share}/zsh/history
 [[ -d $HISTFILE:h ]] || mkdir -p $HISTFILE:h
 HISTSIZE=10000   # max history in session
 SAVEHIST=10000   # max entries in HISTFILE
-
-
-#
 # Functions
-#
-
 # Autoload funcdir and subdirs.
 for funcdir in $ZDOTDIR/functions $ZDOTDIR/functions/*(N/); do
   fpath=($funcdir $fpath)
   autoload -Uz $fpath[1]/*(.:t)
 done
 unset funcdir
-
-
-#
 # Completions
-#
-
 fpath=($ZDOTDIR/completions(/N) $fpath)
-
-
-#
 # Aliases
-#
-
 alias hist="fc -li"
 alias dirh="dirs -v"
 alias ll='ls -lh'
 alias la='ls -lAh'
-
-#
 # Utilities
-#
-
 # Load more specific 'run-help' function from $fpath.
 (( $+aliases[run-help] )) && unalias run-help && autoload -Uz run-help
 alias help=run-help

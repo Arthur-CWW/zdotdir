@@ -10,15 +10,18 @@
 #
 
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-${HOME}/.config}
-export ZDOTDIR=${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}
+# export ZDOTDIR=${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}
+
+export ZDOTDIR=$HOME/dotfiles/zsh
 
 #
 # .zprofile
 #
 
 # We use .zprofile for everything else (load for non-login, non-interactive shells).
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+if [[ ("$SHLVL" -eq 1 && ! -o LOGIN) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-# vim: ft=zsh sw=2 ts=2 et
+#
+. "/home/arthur/.local/share/cargo/env"

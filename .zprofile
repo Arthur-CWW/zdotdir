@@ -80,3 +80,9 @@ fi
 [[ -z "$READNULLCMD" ]] || READNULLCMD=$PAGER
 
 # vim: ft=zsh sw=2 ts=2 et
+
+# Fig post block. Keep at the bottom of this file.
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"

@@ -1,53 +1,31 @@
-###
-# Setup environment.
-###
-
-# dotfiles
-export DOTFILES=${DOTFILES:-~/.config/dotfiles}
-
-# editors
-export EDITOR=vim
+export DOTFILES=${DOTFILES:-$HOME/dotfiles}
+export KEYTIMEOUT=1
+export EDITOR=nvim
 export VISUAL=code
-
-# go
-export GLOBALGOPATH=$HOME/Projects/golang
-export GOPATH=$GLOBALGOPATH
-
-# groovy
-if [[ "$OSTYPE" == darwin* ]]; then
-  export GROOVY_HOME=$HOMEBREW_PREFIX/opt/groovy/libexec  # per homebrew
-  export GROOVY_TURN_OFF_JAVA_WARNINGS="true"
-fi
-
-# perl
-# if [[ "$OSTYPE" == darwin* ]]; then
-#   # eval "$(perl -I$XDG_DATA_HOME/perl5/lib/perl5 -Mlocal::lib=$XDG_DATA_HOME/perl5)"
-#   export PERL_MB_OPT='--install_base "$XDG_DATA_HOME/perl5"'
-#   export PERL_MM_OPT='INSTALL_BASE=$XDG_DATA_HOME/perl5'
-#   if [[ ! -d $XDG_DATA_HOME/perl5 ]]; then
-#     mkdir -p $XDG_DATA_HOME/perl5
-#     cpan local::lib
-#   fi
-# fi
-
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+export PATH=$PATH:$HOME/.pulumi/bin
+export PATH="$PATH:$HOME/Documents/automation_scripts/launch"
+# # go
+# export GLOBALGOPATH=$HOME/Projects/golang
+# export GOPATH=$GLOBALGOPATH
+export FZF_DEFAULT_COMMAND='fd'
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export WASMTIME_HOME="$HOME/.wasmtime"
+export PATH="$HOME/.local/share/flatpak:$PATH"
+export ISO_DIR="$HOME/Downloads/iso"
+export COMP_DIR="$HOME/.config/zsh/completions"
+# eval "$(fnm env --use-on-cd)"
+export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+export TEMP=$HOME/Downloads/tmp
 # Set $PATH.
 path=(
-  # core
   $HOME/{,s}bin(N)
-  /opt/{homebrew,local}/{,s}bin(N)
+  # /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
-
-  # emacs
-  $HOME/.emacs.d/bin(N)
-  $HOME/.config/emacs/bin(N)
-
-  # apps
-  $HOMEBREW_PREFIX/opt/curl/bin(N)
-  $HOMEBREW_PREFIX/opt/go/libexec/bin(N)
-  $HOMEBREW_PREFIX/opt/ruby/bin(N)
-  $HOMEBREW_PREFIX/lib/ruby/gems/*/bin(N)
-  $HOME/.gem/ruby/*/bin(N)
-  $HOMEBREW_PREFIX/share/npm/bin(N)
-
+  $HOME/.fnm
+  $PNPM_HOME
+  $HOME/.local/bin
+  $HOME/.local/share/flatpak
   $path
 )
